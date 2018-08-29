@@ -11,7 +11,7 @@ router.get('/fetchList', async (ctx, next) => {
 })
 
 router.get('/list/:id', async (ctx, next) => {
-  ctx.body = musicList[ctx.params.id];
+  ctx.body = musicList[ctx.params.id - 1];
 })
 
 module.exports = router
