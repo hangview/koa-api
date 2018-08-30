@@ -5,6 +5,7 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+const cors = require('koa2-cors');
 
 const index = require('./routes/index')
 const nvs = require('./routes/nv')
@@ -13,6 +14,9 @@ const nvs = require('./routes/nv')
 onerror(app)
 
 // middlewares
+app.use(cors({
+    origin: ctx => "*"
+}))
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
