@@ -1,8 +1,6 @@
 const Router = require('koa-router');
 const musicList = require('../mock/music');
-let router = new Router();
-
-router = new Router({
+let router = new Router({
   prefix: '/api'
 })
 
