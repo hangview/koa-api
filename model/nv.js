@@ -1,3 +1,9 @@
+const mergeUrl = (url) => {
+    if(url && url.slice(0,4) != 'http'){
+        url = 'http:' + url;
+    }
+    return url
+}
 class Nv {
     constructor({
         userId=0,
@@ -21,7 +27,13 @@ class Nv {
         this.totalFanNum = totalFanNum;
         this.avatarUrl = encode?encodeURIComponent(avatarUrl):decodeURIComponent(avatarUrl);
         this.cardUrl = encode?encodeURIComponent(cardUrl):decodeURIComponent(cardUrl);
-        this.imgList = imgList;
+        if(imgList instanceof Array && imgList.length >0) {
+            this.imgList = imgList.map(url => mergeUrl(url));
+        }
+        if(!encode) {
+            this.avatarUrl = mergeUrl(this.avatarUrl);
+            this.cardUrl = mergeUrl(this.cardUrl);
+        }
     }
 }
 
