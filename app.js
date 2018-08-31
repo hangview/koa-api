@@ -9,6 +9,7 @@ const cors = require('koa2-cors');
 
 const index = require('./routes/index')
 const nvs = require('./routes/nv')
+const custom = require('./routes/custom')
 
 // error handler
 onerror(app)
@@ -39,5 +40,6 @@ app.use(async (ctx, next) => {
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(nvs.routes(), nvs.allowedMethods())
+app.use(custom.routes(), custom.allowedMethods())
 
 module.exports = app

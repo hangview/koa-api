@@ -22,8 +22,22 @@ class NvDb {
         return _arr.map(nv => new NvModel(nv,[],false));
     }
 
-    async getList(page){
-        const sql = `select * from user limit ${50*(page-1)},50`;
+    async getList(page,params){
+        let orderSql = '', typeSql = '', citySql = '';
+        let limit = params && params.limit?params.limit:50;
+        if(params && params.order){
+            orderSql = ` order by ${params.order} desc `;
+        }
+        if(params && params.type ){
+            typeSql = ` where type='${params.type}' `;
+        }
+
+        if(params && params.city ){
+            citySql = ` city='${params.city}'`;
+            citySql = typeSql?` and ${citySql} `:` where ${citySql}`;
+        }
+
+        const sql = `select * from user ${typeSql} ${citySql} ${orderSql} limit ${limit*(page-1)},${limit}`;
         let _arr = await query(sql);
         return _arr.map(nv => new NvModel(nv,[],false));
     }

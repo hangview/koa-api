@@ -22,10 +22,9 @@ router.get('/like/:string', async (ctx, next) => {
 })
 
 router.get('/list/:page', async (ctx, next) => {
-    let res = await Nv.getList(ctx.params.page);
+    let res = await Nv.getList(ctx.params.page,ctx.query);
     ctx.body = JSON.stringify(res);
 })
-
 
 
 module.exports = router
