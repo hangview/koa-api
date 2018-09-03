@@ -11,6 +11,11 @@ router.get('/num',async (ctx,next) => {
     ctx.body = res;
 })
 
+router.get('/all',async (ctx,next) => {
+    let res = await Nv.getAll();
+    ctx.body = res;
+})
+
 router.get('/:id', async (ctx, next) => {
     let res = await Nv.getNv(ctx.params.id);
     ctx.body = JSON.stringify(res);

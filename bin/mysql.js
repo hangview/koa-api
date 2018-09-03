@@ -2,16 +2,27 @@ const mysql = require('mysql');
 const getPageData = require('../model/originApi');
 const Nv = require('../model/nv');
 const DB = require('../config/db');
+const NvDB = require('../service/nv');
+const NvService = new NvDB();
 let lastAddPage = 0;
 let TIME = '';
 
 const pool  = mysql.createPool(DB)
 
 async function main(num=1) {
-    for(let i = num;i<1814;i++){
-        await insertData(i);
-        lastAddPage = i;
-        console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  第${i}页添加成功`);
+    // for(let i = num;i<1814;i++){
+    //     await insertData(i);
+    //     lastAddPage = i;
+    //     console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  第${i}页添加成功`);
+    // }
+    let all = await NvService.getAll();
+    for(let i =0;i<all.length;i++){
+        let _nv = all[i];
+        let nv = await NvService.getNv(_nv.userId);
+        if(!nv.imgList){
+            await NvService.setNvHasImg({has:0,id:_nv.id});
+            console.log(`更新id=${_nv.id}成功`);
+        }
     }
 }
 

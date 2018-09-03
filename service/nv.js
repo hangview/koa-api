@@ -5,6 +5,11 @@ class NvDb {
     constructor(){
     }
 
+    async getAll(){
+        const sql = `select * from user`;
+        let _arr = await query(sql);
+        return _arr;
+    }
     async getNum(){
         const sql = `select id from user`;
         let _arr = await query(sql);
@@ -21,7 +26,11 @@ class NvDb {
         let _arr = await query(sql);
         return _arr.map(nv => new NvModel(nv,[],false));
     }
-
+    async setNvHasImg({has,id}) {
+        const sql = `update user set hasImg=${has} where id=${id}`;
+        let res = await query(sql);
+        return res;
+    }
     async getList(page,params){
         let orderSql = '', typeSql = '', citySql = '';
         let limit = params && params.limit?params.limit:50;
