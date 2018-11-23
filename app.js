@@ -10,6 +10,7 @@ const cors = require('koa2-cors');
 const index = require('./routes/index')
 const nvs = require('./routes/nv')
 const custom = require('./routes/custom')
+const music = require('./routes/music')
 
 // error handler
 onerror(app)
@@ -41,5 +42,6 @@ app.use(async (ctx, next) => {
 app.use(index.routes(), index.allowedMethods())
 app.use(nvs.routes(), nvs.allowedMethods())
 app.use(custom.routes(), custom.allowedMethods())
+app.use(music.routes(), music.allowedMethods())
 
 module.exports = app

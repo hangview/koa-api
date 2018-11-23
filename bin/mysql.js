@@ -17,7 +17,7 @@ async function main(num=1) {
     //     console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  第${i}页添加成功`);
     // }
     let all = await NvService.getAll();
-    for(let i =0;i<all.length;i++){
+    for(let i =all.length - 1;i>0;i--){
         let _nv = all[i];
         let nv = await NvService.getNv(_nv.userId);
         if(!nv.imgList){
