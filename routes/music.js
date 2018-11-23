@@ -15,4 +15,4 @@ router.get('/:id', async (ctx, next) => {
   ctx.body = res;
 });
 
-
+module.exports = router;
