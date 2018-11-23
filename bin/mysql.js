@@ -1,3 +1,4 @@
+// taomm pics add scripts
 const mysql = require('mysql');
 const getPageData = require('../model/originApi');
 const Nv = require('../model/nv');
