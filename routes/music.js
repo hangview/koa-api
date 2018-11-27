@@ -10,7 +10,7 @@ router.get('/all', async (ctx, next) => {
   let res = await Music.getAll();
   ctx.body = res;
 });
-router.get('/:id', async (ctx, next) => {
+router.get('/list/:id', async (ctx, next) => {
   let res = await Music.getMusic(ctx.params.id);
   ctx.body = res;
 });

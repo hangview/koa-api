@@ -13,7 +13,8 @@ class MusicDb {
   async getMusic(id){
     const sql = `select * from music where id = ${id}`;
     let res = await query(sql);
-    return new MusicModel(res);
+    console.log(res);
+    return new MusicModel(res[0]);
   }
 }
 
